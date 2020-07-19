@@ -19,7 +19,6 @@
 
 <body>
 	<ons-navigator id="navigator" page="stock.html"></ons-navigator>
-
 	<ons-template id="stock.html">
 		<ons-page id="stock-page">
 
@@ -55,11 +54,12 @@
 						<span class="notification" id="stock-badge">100</span>
 						<span class="notification" id="BB-badge">100</span>
           </li>
+ <body onload="init()" onunload="init2()">
         </ul>
       </div> -->
 
-				<ons-template id="detail.html">
-					<ons-page id="detail-page">
+				<ons-template id="detail.html" onload="detail()">
+					<ons-page id="detail-page" >
 						<ons-toolbar>
 							<div class="left">
 								<ons-back-button>StockPage</ons-back-button>

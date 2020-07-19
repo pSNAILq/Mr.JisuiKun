@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget xmlns="http://www.w3.org/ns/widgets" id="com.example.helloworld" version="1.0.0">
   <name>Minimum Template</name>
-  <description/>
+  <description>Made with Monaca (http://monaca.mobi)</description>
   <author/>
   <content src="index.html"/>
   <access origin="*"/>
@@ -88,4 +88,6 @@
     <preference name="SplashScreenHeight" value="300"/>
     <preference name="ShowSplashScreen" value="false"/>
   </platform>
+  <preference name="WindowsStorePublisherName" value="My Name"/>
+  <preference name="WindowsStoreIdentityName" value="dcc9a204-f5fc-0cdb-972b-50eaa70d46bf"/>
 </widget>

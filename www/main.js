@@ -48,52 +48,56 @@ var items =  [
   ["milk",2,3],
   ["onion",1,3]
   ];
+    // ons.bootstrap();
 window.onload=function(){
+    // ons.ready(function() {
   // alert(items.length);
 
-  var list = document.getElementById("ons-stock-list");
-  for(var i = 0; i<items.length;i++){
-  const newItem = document.createElement("ons-list-item");
-  newItem.className='item';
-  newItem.id=items[i][id_num];
-  newItem.modifier='tappable';
-  newItem.value = i;
+  // var list = document.getElementById("ons-stock-list");
+  // for(var i = 0; i<items.length;i++){
+  // const newItem = document.createElement("ons-list-item");
+  // newItem.className='item';
+  // newItem.id=items[i][id_num];
+  // newItem.modifier='tappable';
+  // newItem.value = i;
 
-  newItem.onclick = ()=>{
-    currentItem = newItem.id;
-    // alert(currentItem);
-    currentItemNum = newItem.value;
+  // newItem.onclick = ()=>{
+  //   currentItem = newItem.id;
+  //   // alert(currentItem);
+  //   currentItemNum = newItem.value;
 
-    alert(currentItemNum);
+  //   // alert(currentItemNum);
     
-    document.querySelector('#navigator').pushPage('detail.html');
-  }
+  //   document.querySelector('#navigator').pushPage('detail.html');
+  // }
 
-  const newItemImg = document.createElement("img");
-  newItemImg.src="icon/"+newItem.id+".png";
-  newItemImg.width = "80";
-  newItemImg.height = "80";
-  newItemImg.className= "itemImg";
+  // const newItemImg = document.createElement("img");
+  // newItemImg.src="./icon/"+newItem.id+".png";
+  // newItemImg.width = "80";
+  // newItemImg.height = "80";
+  // newItemImg.className= "itemImg";
 
-  const newStockBadge = document.createElement("span");
-  newStockBadge.className="notification";
-  newStockBadge.id="stock-badge";
-  newStockBadge.textContent=items[i][stock_num];
+  // const newStockBadge = document.createElement("span");
+  // newStockBadge.className="notification";
+  // newStockBadge.id="stock-badge";
+  // newStockBadge.textContent=items[i][stock_num];
   
-  const newBBadge = document.createElement("span");
-  newBBadge.className="notification";
-  newBBadge.id="BB-badge";
-  newBBadge.textContent=items[i][B_num];
+  // const newBBadge = document.createElement("span");
+  // newBBadge.className="notification";
+  // newBBadge.id="BB-badge";
+  // newBBadge.textContent=items[i][B_num];
 
 
-  newItem.appendChild(newItemImg);
-  newItem.appendChild(newStockBadge);
-  newItem.appendChild(newBBadge);
-  list.appendChild(newItem);
-  alert(newItem);
+  // newItem.appendChild(newItemImg);
+  // newItem.appendChild(newStockBadge);
+  // newItem.appendChild(newBBadge);
+  // list.appendChild(newItem);
+  // // alert(newItem);
   
-  }
+  // }
 }
+
+
 
 function makeItem(){
     alert(items.length);
@@ -101,6 +105,7 @@ function makeItem(){
     alert(i);
   }
 }
+
 
 function push(e) {
   // console.log("test");
@@ -124,12 +129,67 @@ function addPage(){
  document.querySelector('#navigator').pushPage('add.html');
 }
 
-function clickBtn3(){
-
-  document.location = "index.html";
-
+function detail(){
+  alert("alla");
 }
+function clickBtn3(){
+  document.location = "index.html";
+}
+$('#add-page').on('load', function() {
+  alert("a");
+});
+document.addEventListener('init', function(event) {
+  if (event.target.matches('#stock-page')) {
+    
+  var list = document.getElementById("ons-stock-list");
+  for(var i = 0; i<items.length;i++){
+  const newItem = document.createElement("ons-list-item");
+  newItem.className='item';
+  newItem.id=items[i][id_num];
+  newItem.modifier='tappable';
+  newItem.value = i;
 
+  newItem.onclick = ()=>{
+    currentItem = newItem.id;
+    // alert(currentItem);
+    currentItemNum = newItem.value;
+
+    // alert(currentItemNum);
+    
+    document.querySelector('#navigator').pushPage('detail.html');
+  }
+
+  const newItemImg = document.createElement("img");
+  newItemImg.src="./icon/"+newItem.id+".png";
+  newItemImg.width = "80";
+  newItemImg.height = "80";
+  newItemImg.className= "itemImg";
+
+  const newStockBadge = document.createElement("span");
+  newStockBadge.className="notification";
+  newStockBadge.id="stock-badge";
+  newStockBadge.textContent=items[i][stock_num];
+  
+  const newBBadge = document.createElement("span");
+  newBBadge.className="notification";
+  newBBadge.id="BB-badge";
+  newBBadge.textContent=items[i][B_num];
+
+
+  newItem.appendChild(newItemImg);
+  newItem.appendChild(newStockBadge);
+  newItem.appendChild(newBBadge);
+  list.appendChild(newItem);
+  // alert(newItem);
+  
+  }
+    ons.notification.alert('在庫画面が初期化されました');
+    // コンテンツを準備...
+  }else if(event.target.matches('#detail-page')){
+    ons.notification.alert('画面が初期化されました');
+
+  }
+}, false);
 // $('li.some-item').on('click', function(){
 //   var index = $('li.some-item').index(this);
 
