@@ -7,143 +7,89 @@
 	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
 	<script src="components/loader.js"></script>
 	<script src="lib/onsenui/js/onsenui.min.js"></script>
-
+	<!-- <script src="/www/components/jQuery/dist/jquery.min.js"></script> -->
 	<link rel="stylesheet" href="components/loader.css">
 	<link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
 	<link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
 	<link rel="stylesheet" href="css/style.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script src="main.js"></script>
 
-	<script src="main.js">
-
-	</script>
 </head>
 
 <body>
-	<ons-navigator id="navigator" page="page1.html"></ons-navigator>
-	<!-- 
-  <ons-template id="page1.html">
-    <ons-page id="first-page">
-      <ons-toolbar>
-        <div class="center">Page 1</div>
-      </ons-toolbar>
+	<ons-navigator id="navigator" page="stock.html"></ons-navigator>
 
-      <div class="content" style="text-align: center">
-        <p>This is the first page.</p>
-        <ons-button id="detal0">detal</ons-button>
-        <ons-button id="push-button">Push page</ons-button>
-      </div>
-    </ons-page>
-  </ons-template> -->
-
-	<ons-template id="page1.html">
+	<ons-template id="stock.html">
 		<ons-page id="stock-page">
+
 			<ons-toolbar>
-				<div class="center">StockPage</div>
+				<div class="center">在庫画面</div>
 			</ons-toolbar>
 
-			<div class="content" style="text-align: center">
-				<p>This is the stock page.</p>
-				<!-- <ons-button id="detal0">detal</ons-button> -->
-      
-				<ons-button id="add">add</ons-button>
+			<div style="text-align: center">
+						<ons-button id="add" onclick="addPage();">add</ons-button>
 			</div>
-
 			<div id="stock-list">
 
-        
-				<ons-list>
-					<ons-list-header>在庫一覧</ons-list-header>
+				<ons-list id="ons-stock-list">
 
-					<ons-list-item class="item" modifier="tappable" ><img class="itemImg" src="icon/tomato.png" width="80" height="80" >
-          <span class="notification" id="stock-badge">100</span>
-          <span class="notification" id="BB-badge">100</span>
-					</ons-list-item>
-
-					<ons-list-item class="item" modifier="tappable"><img class="itemImg" src="icon/milk.png" width="80" height="80" >
-          <span class="notification" id="stock-badge">100</span>
-          <span class="notification" id="BB-badge">100</span>
-					</ons-list-item>
-
-					<ons-list-item class="item" modifier="tappable"><img class="itemImg" src="icon/cabbage.png" width="80" height="80" >
-          <span class="notification" id="stock-badge">100</span>
-          <span class="notification" id="BB-badge">100</span>
-					</ons-list-item>
-
-					<ons-list-item class="item" modifier="tappable"><img class="itemImg" src="icon/eggplant.png" width="80" height="80" >
-          <span class="notification" id="stock-badge">100</span>
-          <span class="notification" id="BB-badge">100</span>
-					</ons-list-item>
-
-					<ons-list-item class="item" modifier="tappable"><img class="itemImg" src="icon/happoushu.png" width="80" height="80" >
-          <span class="notification" id="stock-badge">100</span>
-          <span class="notification" id="BB-badge">100</span>
-					</ons-list-item>
-
-					<ons-list-item class="item" modifier="tappable"><img class="itemImg" src="icon/lettuce.png" width="80" height="80" >
-          <span class="notification" id="stock-badge">100</span>
-          <span class="notification" id="BB-badge">100</span>
-					</ons-list-item>
-
-					<ons-list-item class="item" modifier="tappable"><img class="itemImg" src="icon/minitomato.png" width="80" height="80" >
-          <span class="notification" id="stock-badge">100</span>
-          <span class="notification" id="BB-badge">100</span>
-					</ons-list-item>
-
-					<ons-list-item class="item" modifier="tappable"><img class="itemImg" src="icon/onion.png" width="80" height="80" >
-          <span class="notification" id="stock-badge">100</span>
-          <span class="notification" id="BB-badge">100</span>
-					</ons-list-item>
-				
-          
-
-          
-		
+					
+					<!-- <ons-list-item class="item" id="tomato" modifier="tappable" onclick="push();">
+            <img class="itemImg" src="icon/tomato.png" width="80" height="80">
+						<span class="notification" id="stock-badge">100</span>
+						<span class="notification" id="BB-badge">100</span>
+					</ons-list-item> -->
 				</ons-list>
-			</div>
 
-		</ons-page>
+				<!-- </div> 
+      <div id="stock-list">
+        <ul>
+          <li class="item" id="tomato" onclick="push(this)">tomato
+            <img class="itemImg" src="icon/lettuce.png" width="80" height="80">
+						<span class="notification" id="stock-badge">100</span>
+						<span class="notification" id="BB-badge">100</span>
+          </li>
+          <li class="item" id="rere" onclick="push(this)">tomato
+            <img class="itemImg" src="icon/lettuce.png" width="80" height="80">
+						<span class="notification" id="stock-badge">100</span>
+						<span class="notification" id="BB-badge">100</span>
+          </li>
+        </ul>
+      </div> -->
 
-	</ons-template>
-	<!-- <ons-template id="page2.html">
-    <ons-page id="second-page">
-      <ons-toolbar>
-        <div class="left"><ons-back-button>Page 1</ons-back-button></div>
-        <div class="center">Page 2</div>
-      </ons-toolbar>
+				<ons-template id="detail.html">
+					<ons-page id="detail-page">
+						<ons-toolbar>
+							<div class="left">
+								<ons-back-button>StockPage</ons-back-button>
+							</div>
+						</ons-toolbar>
 
-      <div class="content" style="text-align: center">
-        <p>This is the second page.</p>
-        <ons-button id="pop-button">Pop page</ons-button>
-      </div>
-    </ons-page>
-  </ons-template> -->
+						<div class="content" style="text-align: center">
+							<p>this is the detail page</p>
+						</div>
+            <div >
+              <img id="detail-item">
+            </div>
+					</ons-page>
+				</ons-template>
 
-	<ons-template id="detail.html">
-		<ons-page id="detail-page">
-			<ons-toolbar>
-				<div class="left">
-					<ons-back-button>StockPage</ons-back-button>
-				</div>
-			</ons-toolbar>
+				<ons-template id="add.html">
+					<ons-page id="add-page">
+						<ons-toolbar>
+							<div class="left">
+								<ons-back-button>StockPage</ons-back-button>
+							</div>
+						</ons-toolbar>
 
-			<div class="content" style="text-align: center">
-				<p>this is the detail page</p>
-			</div>
-		</ons-page>
-	</ons-template>
-	<ons-template id="add.html">
-		<ons-page id="add-page">
-			<ons-toolbar>
-				<div class="left">
-					<ons-back-button>StockPage</ons-back-button>
-				</div>
-			</ons-toolbar>
+						<div class="content" style="text-align: center">
+							<p>this is the add page</p>
+						</div>
+					</ons-page>
+				</ons-template>
 
-			<div class="content" style="text-align: center">
-				<p>this is the add page</p>
-			</div>
-		</ons-page>
-	</ons-template>
+
 </body>
 
 </html>

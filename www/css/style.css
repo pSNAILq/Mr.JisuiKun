@@ -7,31 +7,60 @@
 
 #stock-list {
 	width: 400px;
+  height: 750px;
   position:absolute;
-  top: 100px;
+  top: 0px;
+  overflow-y: scroll;
+  border: 1px solid #ccc
 /* bottom:下辺からどれぐらい上へずらすか
 left:左辺からどれぐらい右へずらすか
 right:右辺からどれぐらい左へずらすか */
 }
+#stock-list::-webkit-scrollbar{
+  display: none;
+}
+
+
 .item{
 	margin: auto;
 	float: left;
-	list-style: none;
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  top:0px;
+  left:0px;
+  list-style: none!important;
+  padding: 4px;
+}
+
+.item:nth-child(even){
+  background: #eff
+}
+
+.item:nth-child(idd){
+  background: #fec;
 }
 
 .itemImg{
-  position: relative;
-  top:-10px;
-  left:-10px;
+   position: absolute;
+  top:10px;
+  left:10px; 
+
 }
 
 #add{
+  height:60px;
   position: absolute;
-  bottom:0px;
+  bottom:30px;
   left :0px;
   width: 100%;
+  background: pink;
+  display: -webkit-flex;
+ display: flex;
+ -webkit-align-items: center; /* 縦方向中央揃え（Safari用） */
+ align-items: center; /* 縦方向中央揃え */
+ -webkit-justify-content: center; /* 横方向中央揃え（Safari用） */
+ justify-content: center; /* 横方向中央揃え */
 }
 
 
