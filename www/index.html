@@ -27,13 +27,13 @@
 			</ons-toolbar>
 
 			<div style="text-align: center">
-						<ons-button id="add" onclick="addPage();">add</ons-button>
+				<ons-button id="add" onclick="addPage();">add</ons-button>
 			</div>
 			<div id="stock-list">
 
 				<ons-list id="ons-stock-list">
 
-					
+
 					<!-- <ons-list-item class="item" id="tomato" modifier="tappable" onclick="push();">
             <img class="itemImg" src="icon/tomato.png" width="80" height="80">
 						<span class="notification" id="stock-badge">100</span>
@@ -59,19 +59,36 @@
       </div> -->
 
 				<ons-template id="detail.html" onload="detail()">
-					<ons-page id="detail-page" >
+					<ons-page id="detail-page">
 						<ons-toolbar>
 							<div class="left">
 								<ons-back-button>StockPage</ons-back-button>
 							</div>
 						</ons-toolbar>
 
-						<div class="content" style="text-align: center">
-							<p>this is the detail page</p>
+						<div class="detail-content" style="text-align: center">
+							<h1 class="detail-content" id="itemName">
+							</h1>
+							<p text-align="center">
+								<img id="detail-item" src="icon/tomato.png" height="200px" width="200px">
+							</p>
+							<h2 class="detail-content">個数
+							</h2>
+                  <ons-button id="consButton">+</ons-button>
+								<p class="detail-content" id="itemStock"></p>
+									<ons-button id="deConsButton">-</ons-button>
+
+							<h2 class="detail-content">購入日</h2>
+							<ons-input type="date" id="itemPurchase"></ons-input>
+							<h2 class="detail-content">賞味期限</h2>
+							<ons-input type="date"  id="itemB"></ons-input>
+              <p >
+							<ons-button id="henkou">変更</ons-button>
+              </p>
+              
+
 						</div>
-            <div >
-              <img id="detail-item">
-            </div>
+
 					</ons-page>
 				</ons-template>
 
@@ -85,7 +102,36 @@
 
 						<div class="content" style="text-align: center">
 							<p>this is the add page</p>
+							<h1>
+								<ons-input type="text" id="inpName">
+									名前
+								</ons-input>
+							</h1>
+							<ons-carousel swipeable overscrollable auto-scroll id="icons" var="carousel">
+							</ons-carousel>
+
+
+							</h1>
+							<h1>
+								<ons-input type="number" id="inpNum">
+									購入個数
+								</ons-input>
+							</h1>
+							<h1>
+								<ons-input type="date" id="inpDate">
+									購入日
+								</ons-input>
+							</h1>
+							<h1>
+								<ons-input type="date" id="inpBB">
+									賞味期限
+								</ons-input>
+							</h1>
+
+							<ons-button id="accept">確定</ons-button>
+
 						</div>
+
 					</ons-page>
 				</ons-template>
 
