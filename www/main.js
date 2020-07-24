@@ -1,39 +1,17 @@
-// document.addEventListener('init', function (event) {
-//   var page = event.target;
 
-//   if (page.matches('#stock-page')) {
+//APIキーの設定とSDKの初期化
 
-//     // page.querySelector('#push-button').onclick = function() {
-//     //   document.querySelector('#navigator').pushPage('page2.html');
-//     // };
-//     // page.querySelector('#detal0').onclick = function() {
-//     //   document.querySelector('#navigator').pushPage('detail.html');
-//     // };
-//     page.querySelector('#add').onclick = function () {
-//       document.querySelector('#navigator').pushPage('add.html');
-//     };
-//         page.querySelector('item').onclick = function () {
-//       document.querySelector('#navigator').pushPage('add.html');
-//     };
-//     // page.querySelector(".item").onclick = function () {
-//     //   document.querySelector('#navigator').pushPage('detail.html');
-//     // };
-
-//   } else if (page.matches('#second-page')) {
-
-//     page.querySelector('#pop-button').onclick = function () {
-//       document.querySelector('#navigator').popPage();
-//     };
-
-//   }
-// });
-// $(function () {
-//   // Initialization code
-//   // ons.notification.alert('Button is tapped!');
-
-
-// // });
+var appKey = "62c352b44c014a5d1e2d32619c0861d4d8023a8e583b4633873c7815a79bd54e";
+var clientKey = "1cec838882ca2a9354e3c2880f705b56b9731874daf4691f971967c7ee5be3eb";
+var ncmb = new NCMB(appKey, clientKey);
 //コンテンツがロードされたら、リストのアイテムを動的生成
+
+//保存先クラスの作成
+var SaveData = ncmb.DataStore("Stocks");
+//インスタンスの生成
+var saveData = new SaveData();
+//データの保存
+
 const id_num = 0;
 const stock_num = 1;
 const B_num = 2;
@@ -55,150 +33,96 @@ var allItems = [
   "tomato"
 ];
 
-var items = [
-  [allItems[0], 10, 3, "トマト", new Date(2020,01,11),new Date(2020,01,11)],
-  [allItems[2], 10, 3, "トマト",  new Date(2020,10,2),new Date(2020,10,20)],
-  [allItems[4], 10, 3, "トマト",  new Date(2020,10,3),new Date(2020,10,2)],
-  [allItems[5], 2, 3, "トマト",  new Date(2020,10,4),new Date(2020,10,1)],
-  [allItems[7], 1, 3, "トマト",  new Date(2020,10,5),new Date(2020,10,20)]
-];
+var items = [/*
+  [allItems[0], 10, 3, "トマト", new Date(2020, 01, 11), new Date(2020, 01, 11)],
+  [allItems[2], 10, 3, "トマト", new Date(2020, 10, 2), new Date(2020, 10, 20)],
+  [allItems[4], 10, 3, "トマト", new Date(2020, 10, 3), new Date(2020, 10, 2)],
+  [allItems[5], 2, 3, "トマト", new Date(2020, 10, 4), new Date(2020, 10, 1)],
+  [allItems[7], 1, 3, "トマト", new Date(2020, 10, 5), new Date(2020, 10, 20)]
+*/];
 
-
-// ons.bootstrap();
-// window.onload=function(){
-// ons.ready(function() {
-// alert(items.length);
-
-// var list = document.getElementById("ons-stock-list");
-// for(var i = 0; i<items.length;i++){
-// const newItem = document.createElement("ons-list-item");
-// newItem.className='item';
-// newItem.id=items[i][id_num];
-// newItem.modifier='tappable';
-// newItem.value = i;
-
-// newItem.onclick = ()=>{
-//   currentItem = newItem.id;
-//   // alert(currentItem);
-//   currentItemNum = newItem.value;
-
-//   // alert(currentItemNum);
-
-//   document.querySelector('#navigator').pushPage('detail.html');
-// }
-
-// const newItemImg = document.createElement("img");
-// newItemImg.src="./icon/"+newItem.id+".png";
-// newItemImg.width = "80";
-// newItemImg.height = "80";
-// newItemImg.className= "itemImg";
-
-// const newStockBadge = document.createElement("span");
-// newStockBadge.className="notification";
-// newStockBadge.id="stock-badge";
-// newStockBadge.textContent=items[i][stock_num];
-
-// const newBBadge = document.createElement("span");
-// newBBadge.className="notification";
-// newBBadge.id="BB-badge";
-// newBBadge.textContent=items[i][B_num];
-
-
-// newItem.appendChild(newItemImg);
-// newItem.appendChild(newStockBadge);
-// newItem.appendChild(newBBadge);
-// list.appendChild(newItem);
-// // alert(newItem);
-
-// }
-// }
+var de = [];
 
 
 
-function makeItem() {
-  alert(items.length);
+
+
+
+function addPage() {
+  document.querySelector('#navigator').pushPage('add.html');
+}
+window.onload = function () {
+  //  alert('にゃんぱすー');
+  // alert(items.length);
+  var list = document.getElementById("ons-stock-list");
   for (var i = 0; i < items.length; i++) {
-    alert(i);
+    const newItem = document.createElement("ons-list-item");
+    newItem.className = 'item';
+    newItem.id = items[i][id_num];
+    newItem.modifier = 'tappable';
+    newItem.value = i;
+
+    newItem.onclick = () => {
+      currentItem = newItem.id;
+      // alert(currentItem);
+      currentItemNum = newItem.value;
+
+      // alert(currentItemNum);
+
+      document.querySelector('#navigator').pushPage('detail.html');
+    }
+
+    const newItemImg = document.createElement("img");
+    newItemImg.src = "./icon/" + items[i][id_num] + ".png";
+    newItemImg.width = "80";
+    newItemImg.height = "80";
+    newItemImg.className = "itemImg";
+
+    const newStockBadge = document.createElement("span");
+    newStockBadge.className = "notification";
+    newStockBadge.id = "stock-badge";
+    newStockBadge.textContent = items[i][stock_num];
+
+    const newBBadge = document.createElement("span");
+    newBBadge.className = "notification";
+    newBBadge.id = "BB-badge";
+    newBBadge.textContent = items[i][B_num];
+
+
+    newItem.appendChild(newItemImg);
+    newItem.appendChild(newStockBadge);
+    newItem.appendChild(newBBadge);
+    list.appendChild(newItem);
+    // alert(newItem);
+
   }
 }
 
 
-function push(e) {
-  // console.log("test");
-  // ons.notification.alert('Button !');
-  // location.href= "detail.html";
-
-
-  // var t = ;
-  var r = e.id;
-  // ons.notification.alert(r);
-  //  r = $(".item").attr('id');
-  alert(r);
-  // ons.notification.alert($(this).attr('id'));
-  //  $("#detailItem").text(t+);
-  // navigator.pushPage('detail.html');
-
-  // navigator.pushPage('add_account.html', { animation : 'slide' } );
-  document.location = "test.html";
-}
-function addPage() {
-  document.querySelector('#navigator').pushPage('add.html');
-}
-
-function detail() {
-  alert("alla");
-}
-function clickBtn3() {
-  document.location = "index.html";
-}
-$('#add-page').on('load', function () {
-  alert("a");
-});
 document.addEventListener('init', function (event) {
   if (event.target.matches('#stock-page')) {
 
-    var list = document.getElementById("ons-stock-list");
-    for (var i = 0; i < items.length; i++) {
-      const newItem = document.createElement("ons-list-item");
-      newItem.className = 'item';
-      newItem.id = items[i][id_num];
-      newItem.modifier = 'tappable';
-      newItem.value = i;
+    //  alert(SaveData.fetchAll().length);
+    SaveData.fetchAll()
+      .then(function (results) {
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          var temp = [
+            object.img,
+            object.num,
+            (new Date(object.bb) - new Date(object.purchase)) / (1000 * 60 * 60 * 24),
+            object.itemName,
+            object.purchase,
+            object.bb];
+          items.push(temp);
+          //  alert(object.img + " - " + object.get("itemName"));
+        }
+        // alert(items.length);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
 
-      newItem.onclick = () => {
-        currentItem = newItem.id;
-        // alert(currentItem);
-        currentItemNum = newItem.value;
-
-        // alert(currentItemNum);
-
-        document.querySelector('#navigator').pushPage('detail.html');
-      }
-
-      const newItemImg = document.createElement("img");
-      newItemImg.src = "./icon/" + items[i][id_num] + ".png";
-      newItemImg.width = "80";
-      newItemImg.height = "80";
-      newItemImg.className = "itemImg";
-
-      const newStockBadge = document.createElement("span");
-      newStockBadge.className = "notification";
-      newStockBadge.id = "stock-badge";
-      newStockBadge.textContent = items[i][stock_num];
-
-      const newBBadge = document.createElement("span");
-      newBBadge.className = "notification";
-      newBBadge.id = "BB-badge";
-      newBBadge.textContent = items[i][B_num];
-
-
-      newItem.appendChild(newItemImg);
-      newItem.appendChild(newStockBadge);
-      newItem.appendChild(newBBadge);
-      list.appendChild(newItem);
-      // alert(newItem);
-
-    }
     // ons.notification.alert('在庫画面が初期化されました');
     // コンテンツを準備...
   } else if (event.target.matches('#detail-page')) {
@@ -214,17 +138,20 @@ document.addEventListener('init', function (event) {
     itemStock.textContent = items[currentItemNum][stock_num];
 
     /*日付 */
+    itemPurchase.value = items[currentItemNum][purchase_num];
+    /*
     var yyyy = items[currentItemNum][purchase_num].getFullYear();
-    var mm = ("0"+(items[currentItemNum][purchase_num].getMonth())).slice(-2);
-    var dd = ("0"+items[currentItemNum][purchase_num].getDate()).slice(-2);
-    itemPurchase.value = yyyy+'-'+mm+'-'+dd;
+    var mm = ("0" + (items[currentItemNum][purchase_num].getMonth())).slice(-2);
+    var dd = ("0" + items[currentItemNum][purchase_num].getDate()).slice(-2);
+    itemPurchase.value = yyyy + '-' + mm + '-' + dd;
 
     yyyy = items[currentItemNum][B_num_].getFullYear();
-    mm = ("0"+(items[currentItemNum][B_num_].getMonth())).slice(-2);
-    dd = ("0"+items[currentItemNum][B_num_].getDate()).slice(-2);
-    alert(yyyy+'-'+mm+'-'+dd);
-    itemB.value = yyyy+'-'+mm+'-'+dd;
-
+    mm = ("0" + (items[currentItemNum][B_num_].getMonth())).slice(-2);
+    dd = ("0" + items[currentItemNum][B_num_].getDate()).slice(-2);
+    alert(yyyy + '-' + mm + '-' + dd);
+    itemB.value = yyyy + '-' + mm + '-' + dd;
+*/
+    itemB.value = items[currentItemNum][B_num_];
     // ons.notification.alert(detailitem+"a");
   } else if (event.target.matches('#add-page')) {
     var carouselList = document.getElementById("icons");
@@ -256,13 +183,26 @@ document.addEventListener('init', function (event) {
     document.getElementById("accept").onclick = function () {
       //   document.getElementById("text").innerHTML = "クリックされた！";
       // };
-     ons.notification.alert("ale"
-     +inpName.value+"\n"
-     +icon.getActiveIndex()+"\n"/*.getActiveCarouselItemIndex()+"\n"*/
-     +inpNum.value+"\n"
-     +inpDate.value+"\n"
-     +inpBB.value);
-      document.querySelector('#navigator').popPage();
+      ons.notification.alert("ale"
+        + inpName.value + "\n"
+        + allItems[icon.getActiveIndex()] + "\n"/*.getActiveCarouselItemIndex()+"\n"*/
+        + inpNum.value + "\n"
+        + inpDate.value + "\n"
+        + inpBB.value);
+      saveData.set("itemName", inpName.value)
+        .set("img", allItems[icon.getActiveIndex()])
+        .set("num", inpNum.value)
+        .set("purchase", inpDate.value)
+        .set("bb", inpBB.value)
+        .save()
+        .then(function (results) {
+          //保存に成功した場合の処理
+        })
+        .catch(function (error) {
+          //保存に失敗した場合の処理
+        });
+        document.location.reload();
+      // document.querySelector('#navigator').popPage();
     }
   }
 }, false);
