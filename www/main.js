@@ -51,122 +51,95 @@ var de = [];
 function addPage() {
   document.querySelector('#navigator').pushPage('add.html');
 }
-  var list ;
-window.onload = function () {
-   list = document.getElementById("ons-stock-list");
-  //  alert('にゃんぱすー');
-  // alert(items.length);
-  for (var i = 0; i < items.length; i++) {
-    const newItem = document.createElement("ons-list-item");
-    newItem.className = 'item';
-    newItem.id = items[i][id_num];
-    newItem.modifier = 'tappable';
-    newItem.value = i;
-
-    newItem.onclick = () => {
-      currentItem = newItem.id;
-      // alert(currentItem);
-      currentItemNum = newItem.value;
-
-      // alert(currentItemNum);
-
-      document.querySelector('#navigator').pushPage('detail.html');
-    }
-
-    const newItemImg = document.createElement("img");
-    newItemImg.src = "./icon/" + items[i][id_num] + ".png";
-    newItemImg.width = "80";
-    newItemImg.height = "80";
-    newItemImg.className = "itemImg";
-
-    const newStockBadge = document.createElement("span");
-    newStockBadge.className = "notification";
-    newStockBadge.id = "stock-badge";
-    newStockBadge.textContent = items[i][stock_num];
-
-    const newBBadge = document.createElement("span");
-    newBBadge.className = "notification";
-    newBBadge.id = "BB-badge";
-    newBBadge.textContent = items[i][B_num];
+var list;
 
 
-    newItem.appendChild(newItemImg);
-    newItem.appendChild(newStockBadge);
-    newItem.appendChild(newBBadge);
-    list.appendChild(newItem);
-    // alert(newItem);
+//////show がある
 
-  }
-}
-
-
-function addItem(){
-    const newItem = document.createElement("ons-list-item");
-    newItem.className = 'item';
-    newItem.id = items[items.length][id_num];
-    newItem.modifier = 'tappable';
-    newItem.value = items.length;
-
-    newItem.onclick = () => {
-      currentItem = newItem.id;
-      // alert(currentItem);
-      currentItemNum = newItem.value;
-
-      // alert(currentItemNum);
-
-      document.querySelector('#navigator').pushPage('detail.html');
-    }
-
-    const newItemImg = document.createElement("img");
-    newItemImg.src = "./icon/" + items[items.length][id_num] + ".png";
-    newItemImg.width = "80";
-    newItemImg.height = "80";
-    newItemImg.className = "itemImg";
-
-    const newStockBadge = document.createElement("span");
-    newStockBadge.className = "notification";
-    newStockBadge.id = "stock-badge";
-    newStockBadge.textContent = items[items.length][stock_num];
-
-    const newBBadge = document.createElement("span");
-    newBBadge.className = "notification";
-    newBBadge.id = "BB-badge";
-    newBBadge.textContent = items[items.length][B_num];
-
-
-    newItem.appendChild(newItemImg);
-    newItem.appendChild(newStockBadge);
-    newItem.appendChild(newBBadge);
-    list.appendChild(newItem);
-}
-
-document.addEventListener('init', function (event) {
+document.addEventListener('show', function (event) {
   if (event.target.matches('#stock-page')) {
 
     //  alert(SaveData.fetchAll().length);
     SaveData.fetchAll()
       .then(function (results) {
+        items.splice(0);
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           var temp = [
             object.img,
             object.num,
-            (new Date(object.bb) - new Date(object.purchase)) / (1000 * 60 * 60 * 24),
+            Math.ceil((new Date(object.bb) - new Date()) / 86400000),
             object.itemName,
             object.purchase,
             object.bb];
+
+
           items.push(temp);
-           alert(object.img + " - " + object.get("itemName"));
+          // alert(object.img + " - " + object.get("itemName"));
+        }
+        list = document.getElementById("ons-stock-list");
+        while (list.lastChild) {
+          list.removeChild(list.lastChild);
+        }
+        //  alert('にゃんぱすー');
+        // alert(items.length);
+        for (var i = 0; i < items.length; i++) {
+          const newItem = document.createElement("ons-list-item");
+          newItem.className = 'item';
+          newItem.id = items[i][id_num];
+          newItem.modifier = 'tappable';
+          newItem.value = i;
+
+          newItem.onclick = () => {
+            currentItem = newItem.id;
+            // alert(currentItem);
+            currentItemNum = newItem.value;
+
+            // alert(currentItemNum);
+
+            document.querySelector('#navigator').pushPage('detail.html');
+          }
+
+          const newItemImg = document.createElement("img");
+          newItemImg.src = "./icon/" + items[i][id_num] + ".png";
+          newItemImg.width = "80";
+          newItemImg.height = "80";
+          if (parseInt(items[i][2],10)< 0) {
+            newItemImg.className = "gray";
+          } else {
+            newItemImg.className = "itemImg";
+          }
+          const newStockBadge = document.createElement("span");
+          newStockBadge.className = "notification";
+          newStockBadge.id = "stock-badge";
+          newStockBadge.textContent = items[i][stock_num];
+
+          const newBBadge = document.createElement("span");
+          newBBadge.className = "notification";
+          newBBadge.id = "BB-badge";
+          newBBadge.textContent = items[i][B_num];
+
+
+          newItem.appendChild(newItemImg);
+          newItem.appendChild(newStockBadge);
+          newItem.appendChild(newBBadge);
+          list.appendChild(newItem);
+          // alert(newItem);
+
         }
         // alert(items.length);
       })
       .catch(function (err) {
         console.log(err);
       });
+  }
+});
+document.addEventListener('init', function (event) {
 
-    // ons.notification.alert('在庫画面が初期化されました');
-    // コンテンツを準備...
-  } else if (event.target.matches('#detail-page')) {
+
+  // ons.notification.alert('在庫画面が初期化されました');
+  // コンテンツを準備...
+  if (event.target.matches('#detail-page')) {
     var detailitem = document.getElementById("detail-item");
     detailitem.src = "./icon/" + items[currentItemNum][id_num] + ".png";
 
@@ -238,31 +211,31 @@ document.addEventListener('init', function (event) {
         .save()
         .then(function (results) {
           //保存に成功した場合の処理
-     SaveData.fetchAll()
-      .then(function (results) {
-          var object = results[results.length];
-          var temp = [
-            object.img,
-            object.num,
-            (new Date(object.bb) - new Date(object.purchase)) / (1000 * 60 * 60 * 24),
-            object.itemName,
-            object.purchase,
-            object.bb];
-          items.push(temp);
-           alert(object.img + " - " + object.get("itemName"));
-        // alert(items.length);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-          addItem();
-       document.querySelector('#navigator').pushPage('stock.html');
-          
+          SaveData.fetchAll()
+            .then(function (results) {
+              var object = results[results.length];
+              var temp = [
+                object.img,
+                object.num,
+                (new Date(object.bb) - new Date(object.purchase)) / (1000 * 60 * 60 * 24),
+                object.itemName,
+                object.purchase,
+                object.bb];
+              items.push(temp);
+              alert("保存に成功しました!\n" + object.img + " - " + object.get("itemName"));
+              // addItem();
+            })
+            .catch(function (err) {
+              console.log(err);
+            });
+
+          document.querySelector('#navigator').popPage();
+
         })
         .catch(function (error) {
           //保存に失敗した場合の処理
         });
-        // document.location.reload();
+      // document.location.reload();
       // document.querySelector('#navigator').popPage();
     }
   }

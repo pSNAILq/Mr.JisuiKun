@@ -66,12 +66,7 @@ right:右辺からどれぐらい左へずらすか */
   background: #fec;
 }
 
-.itemImg{
-   position: absolute;
-  top:10px;
-  left:10px; 
 
-}
 
 #add{
   height:60px;
@@ -141,13 +136,20 @@ ons-carousel-item {
 
 
 img.gray {
-
-    position: relative;
-  top:-10px;
-  left:-10px;
+   position: absolute;
+  top:10px;
+  left:10px; 
 -webkit-filter: grayscale(100%);
 -moz-filter: grayscale(100%);
 -ms-filter: grayscale(100%);
 -o-filter: grayscale(100%);
 filter: grayscale(100%);
+}
+
+
+.itemImg{
+   position: absolute;
+  top:10px;
+  left:10px; 
+
 }
